@@ -1,0 +1,112 @@
+# name : mern CI pipeline
+# on:
+#   push:
+#     branches:
+#       - master
+#       - main
+#     workflow_dispatch:
+
+# jobs:
+#   backend:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Install Node
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
+
+#       - name: Install backend dependencies
+#         run: |
+#           cd backend
+#           npm install
+
+#       - name: Run backend tests
+#         run: |
+#           cd backend
+#           node index.js &
+#           sleep 3
+#           curl http://localhost:5000
+      
+#   frontend:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Install Node
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
+
+#       - name: Install frontend dependencies
+#         run: |
+#           cd frontend
+#           npm install
+
+#       - name: Run frontend tests
+#         run: |
+#           cd frontend
+#           npm start &
+#           sleep 5
+#           curl http://localhost:3000
+
+
+
+name: mern CI pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          node index.js &
+          sleep 3
+          curl http://localhost:5000
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm start &
+          sleep 10
+          curl http://localhost:3000
